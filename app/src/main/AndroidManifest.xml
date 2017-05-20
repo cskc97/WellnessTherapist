@@ -41,7 +41,9 @@
                 android:value="true" />
         </activity>
         <activity android:name=".FillDetails" />
-        <activity android:name=".TherapistProfile"></activity>
+
+        <activity android:name=".TherapistProfile"
+            />
     </application>
 
 </manifest>
