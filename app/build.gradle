@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.neenbedankt.android-apt'
 
 android {
     compileSdkVersion 25
@@ -18,6 +19,8 @@ android {
         }
     }
 }
+
+
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
@@ -46,5 +49,13 @@ dependencies {
 
     compile 'com.jakewharton:butterknife:8.6.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.6.0'
+
+
+
     compile 'org.greenrobot:eventbus:3.0.0'
+
+    compile 'fr.xebia.android.freezer:freezer:2.0.6'
+    provided 'fr.xebia.android.freezer:freezer-annotations:2.0.6'
+    apt 'fr.xebia.android.freezer:freezer-compiler:2.0.6'
+
 }

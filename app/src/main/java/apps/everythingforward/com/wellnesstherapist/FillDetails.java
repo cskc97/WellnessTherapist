@@ -3,8 +3,12 @@ package apps.everythingforward.com.wellnesstherapist;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -22,8 +26,12 @@ import com.parse.SaveCallback;
 import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.util.ArrayList;
 
+
+import apps.everythingforward.com.wellnesstherapist.models.TherapistProfileDB;
+import apps.everythingforward.com.wellnesstherapist.models.TherapistProfileDBEntityManager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -35,22 +43,40 @@ public class FillDetails extends AppCompatActivity {
     ParseUser currentUser;
 
 
-    @BindView(R.id.image)
+
     ImageView therapistProfileImage;
 
-    @BindView(R.id.bioTV)EditText bio;
+    EditText bio;
 
-    @BindView(R.id.save)ButtonFlat saveButton;
+    ButtonFlat saveButton;
+    String path;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fill_details);
-        ButterKnife.bind(this);
 
+        therapistProfileImage = (ImageView)findViewById(R.id.image);
+        bio = (EditText)findViewById(R.id.bioTV);
+        saveButton = (ButtonFlat)findViewById(R.id.save);
+
+        therapistProfileImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                pickImage();
+
+            }
+        });
+
+       saveButton.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View view) {
+               onSumbit();
+           }
+       });
     }
 
-    @OnClick(R.id.image)void pickImage()
+    void pickImage()
     {
         ImagePicker.create(this)
                 .folderMode(true) // folder mode (false by default)
@@ -71,25 +97,46 @@ public class FillDetails extends AppCompatActivity {
         if (requestCode == REQUEST_CODE_PICKER && resultCode == RESULT_OK && data != null) {
             ArrayList<Image> images = data.getParcelableArrayListExtra(ImagePickerActivity.INTENT_EXTRA_SELECTED_IMAGES);
 
-            Picasso.with(this).load(images.get(0).getPath()).fit().centerInside().into(therapistProfileImage);
+
+
+
+            path = images.get(0).getPath();
+
+            Toast.makeText(this, path, Toast.LENGTH_LONG).show();
+
+            Uri uri = Uri.fromFile(new File(path));
+
+
+
+
+            Picasso.with(this).load(uri).fit().centerCrop().into(therapistProfileImage);
+
+
+
 
 
             // do your logic ....
         }
     }
 
-    @OnClick(R.id.save)void onSumbit()
+    void onSumbit()
     {
 
 
+
         Bitmap bitmap = ((BitmapDrawable) therapistProfileImage.getDrawable()).getBitmap();
+
+
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
         byte[] imageInByte = baos.toByteArray();
 
+        Log.e("onSumbit",String.valueOf(imageInByte));
+        System.out.println(imageInByte);
+
         currentUser=ParseUser.getCurrentUser();
 
-        ParseFile therapistImage = new ParseFile(currentUser.getUsername()+"_image", imageInByte);
+        ParseFile therapistImage = new ParseFile(currentUser.getEmail()+"_image.jpg", imageInByte);
 
 
         String userName,userEmail,userDescription;
@@ -102,7 +149,13 @@ public class FillDetails extends AppCompatActivity {
         object.put(Utility.THERAPIST_NAME,userName);
         object.put(Utility.THERAPIST_DESCRIPTION,userDescription);
         object.put(Utility.THERAPIST_IMAGE,therapistImage);
-        object.saveInBackground();
+
+
+        TherapistProfileDBEntityManager manager = new TherapistProfileDBEntityManager();
+        manager.add(new TherapistProfileDB(ParseUser.getCurrentUser().getEmail(),path));
+
+
+
 
 
         object.saveInBackground(new SaveCallback() {

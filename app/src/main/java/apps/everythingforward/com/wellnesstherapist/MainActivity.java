@@ -3,6 +3,8 @@ package apps.everythingforward.com.wellnesstherapist;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.Toast;
 
 import com.parse.FindCallback;
 import com.parse.Parse;
@@ -16,7 +18,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    ParseUser currentTherapist;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,15 +26,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        if(ParseUser.getCurrentUser()==null) {
-            ParseLoginBuilder builder = new ParseLoginBuilder(MainActivity.this);
-            builder.setAppLogo(R.drawable.applogo100x100);
 
 
-            startActivityForResult(builder.build(), 0);
-        }
 
-        currentTherapist= ParseUser.getCurrentUser();
+
 
 
 
@@ -45,16 +42,45 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        checkIfInDB();
+        if(ParseUser.getCurrentUser()==null) {
+            ParseLoginBuilder builder = new ParseLoginBuilder(MainActivity.this);
+            builder.setAppLogo(R.drawable.applogo100x100);
+            startActivityForResult(builder.build(), 0);
+
+
+
+
+        }
+        else {
+
+
+            checkIfInDB();
+        }
+
+
+
+
+
+
 
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==0)
+        {
+            Toast.makeText(this, "onActivityResult", Toast.LENGTH_SHORT).show();
+        }
+
+
+    }
 
     private void checkIfInDB()
     {
-
+        Log.e("MainActivity","CheckIfInDB");
         ParseQuery<ParseObject> query = ParseQuery.getQuery(Utility.THERAPIST_CLASSNAME);
-        query.whereEqualTo(Utility.THERAPIST_USERNAME,currentTherapist.getUsername());
+        query.whereEqualTo(Utility.THERAPIST_USERNAME,ParseUser.getCurrentUser().getUsername());
 
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
