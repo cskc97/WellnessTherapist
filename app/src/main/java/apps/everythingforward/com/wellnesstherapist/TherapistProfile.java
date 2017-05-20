@@ -80,7 +80,9 @@ public class TherapistProfile extends AppCompatActivity {
         super.onResume();
 
         TherapistProfileDBEntityManager manager = new TherapistProfileDBEntityManager();
-        imagePath = manager.select().asList().get(0).getImagePath();
+
+
+        imagePath=manager.select().email().equalsTo(ParseUser.getCurrentUser().getEmail()).first().getImagePath();
         Uri uri = Uri.fromFile(new File(imagePath));
         Picasso.with(getApplicationContext()).load(uri).fit().centerCrop().into(profileImage);
 
@@ -128,6 +130,18 @@ public class TherapistProfile extends AppCompatActivity {
         PrimaryDrawerItem item1 = new PrimaryDrawerItem().withIdentifier(1).withName("My Profile");
         PrimaryDrawerItem item2 = new PrimaryDrawerItem().withIdentifier(2).withName("My Patients");
 
+        PrimaryDrawerItem item3 = new PrimaryDrawerItem().withIdentifier(3).withName("Logout");
+
+        item3.withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
+            @Override
+            public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
+
+                ParseUser.getCurrentUser().logOut();
+                finish();
+                return false;
+            }
+        });
+
         AccountHeader headerResult = new AccountHeaderBuilder()
                 .withActivity(this)
 
@@ -146,7 +160,9 @@ public class TherapistProfile extends AppCompatActivity {
                 .addDrawerItems(
                         item1,
                         new DividerDrawerItem(),
-                        item2
+                        item2,
+                        new DividerDrawerItem(),
+                        item3
 
                 )
 
