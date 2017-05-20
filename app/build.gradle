@@ -41,4 +41,10 @@ dependencies {
  //   compile 'com.facebook.android:facebook-android-sdk:[4,5)'
     compile 'com.github.nguyenhoanglam:ImagePicker:1.1.3'
 
+    compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'com.github.vajro:MaterialDesignLibrary:1.6'
+
+    compile 'com.jakewharton:butterknife:8.6.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.6.0'
+    compile 'org.greenrobot:eventbus:3.0.0'
 }
