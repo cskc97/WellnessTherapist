@@ -16,31 +16,50 @@
         android:background="@color/primary"
 
         />
-    
+
+
+    <com.gc.materialdesign.views.Card
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2">
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="2"
-        android:id="@+id/therapistProfileImage"/>
+        android:layout_height="match_parent"
 
-    <TextView
+        android:id="@+id/therapistProfileImage"/>
+    </com.gc.materialdesign.views.Card>
+
+
+    <com.gc.materialdesign.views.Card
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_weight="1">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
         android:id="@+id/therapistProfileName"
         android:gravity="center"
         android:padding="10dp"
         android:textColor="@color/primary_text"
         android:textSize="18sp"/>
-    <TextView
+    </com.gc.materialdesign.views.Card>
+
+
+    <com.gc.materialdesign.views.Card
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="2"
+        android:layout_weight="2">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
         android:id="@+id/therapistProfileDescription"
         android:padding="15dp"
         android:textColor="@color/secondary_text"
         android:gravity="center"
         android:textSize="12sp"/>
+    </com.gc.materialdesign.views.Card>
 
 
 
