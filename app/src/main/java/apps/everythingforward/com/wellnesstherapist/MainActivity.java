@@ -1,5 +1,6 @@
 package apps.everythingforward.com.wellnesstherapist;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -44,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-
+        checkIfInDB();
 
     }
 
@@ -60,14 +61,14 @@ public class MainActivity extends AppCompatActivity {
             public void done(List<ParseObject> objects, ParseException e) {
                 if(objects.isEmpty())
                 {
-
+                    fillDetails();
 
 
 
                 }
                 else
                 {
-
+                    therapistPortal();
 
 
 
@@ -84,6 +85,12 @@ public class MainActivity extends AppCompatActivity {
 
     private void fillDetails()
     {
+        startActivity(new Intent(MainActivity.this,FillDetails.class));
 
+    }
+
+    private void therapistPortal()
+    {
+        startActivity(new Intent(MainActivity.this,TherapistProfile.class));
     }
 }
