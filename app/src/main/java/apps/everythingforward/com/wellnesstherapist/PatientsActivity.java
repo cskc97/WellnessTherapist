@@ -49,63 +49,6 @@ public class PatientsActivity extends AppCompatActivity {
         getPatientsTry();
     }
 
-    private void getPatients()
-    {
-        ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("Connections");
-        query.whereEqualTo(Utility.CONNECTION_THERAPISTUSERNAME, ParseUser.getCurrentUser().getEmail());
-
-        query.findInBackground(new FindCallback<ParseObject>() {
-            @Override
-            public void done(List<ParseObject> objects, ParseException e) {
-                if(e==null)
-                {
-                    if(!objects.isEmpty())
-                    {
-                        for (ParseObject object : objects)
-                        {
-                            ParseQuery<ParseObject> userQuery = new ParseQuery<ParseObject>("User");
-                            userQuery.whereEqualTo(Utility.USER_EMAIL,object.getString(Utility.CONNECTION_USERUSERNAME));
-                            try {
-                                List<ParseObject> data = userQuery.find();
-                                passData.add(data.get(0));
-
-
-                            } catch (ParseException e1) {
-                                e1.printStackTrace();
-                            }
-
-
-                        }
-                        PatientsAdapter adapter = new PatientsAdapter(passData);
-                        recyclerView.setAdapter(adapter);
-                        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-
-
-
-
-
-
-                    }
-                    else
-                    {
-                        Toast.makeText(PatientsActivity.this, "You have no patients", Toast.LENGTH_SHORT).show();
-                    }
-
-
-
-
-                }
-
-
-            }
-        });
-
-
-
-    }
-
-
-
 
 
     private void getPatientsTry()
@@ -184,6 +127,71 @@ public class PatientsActivity extends AppCompatActivity {
 
 
     }
+
+
+
+
+
+
+//    }
+//
+//    private void getPatients()
+//    {
+//        ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("Connections");
+//        query.whereEqualTo(Utility.CONNECTION_THERAPISTUSERNAME, ParseUser.getCurrentUser().getEmail());
+//
+//        query.findInBackground(new FindCallback<ParseObject>() {
+//            @Override
+//            public void done(List<ParseObject> objects, ParseException e) {
+//                if(e==null)
+//                {
+//                    if(!objects.isEmpty())
+//                    {
+//                        for (ParseObject object : objects)
+//                        {
+//                            ParseQuery<ParseObject> userQuery = new ParseQuery<ParseObject>("User");
+//                            userQuery.whereEqualTo(Utility.USER_EMAIL,object.getString(Utility.CONNECTION_USERUSERNAME));
+//                            try {
+//                                List<ParseObject> data = userQuery.find();
+//                                passData.add(data.get(0));
+//
+//
+//                            } catch (ParseException e1) {
+//                                e1.printStackTrace();
+//                            }
+//
+//
+//                        }
+//                        PatientsAdapter adapter = new PatientsAdapter(passData);
+//                        recyclerView.setAdapter(adapter);
+//                        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+//
+//
+//
+//
+//
+//
+//                    }
+//                    else
+//                    {
+//                        Toast.makeText(PatientsActivity.this, "You have no patients", Toast.LENGTH_SHORT).show();
+//                    }
+//
+//
+//
+//
+//                }
+//
+//
+//            }
+//        });
+//
+//
+//
+//    }
+//
+
+
 
 
 }
