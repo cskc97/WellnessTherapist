@@ -13,7 +13,7 @@
         android:minHeight="?android:attr/actionBarSize"
         android:id="@+id/toolbar"
         android:background="@color/primary"
-        android:title="Your Inbox"
+
 
         />
 

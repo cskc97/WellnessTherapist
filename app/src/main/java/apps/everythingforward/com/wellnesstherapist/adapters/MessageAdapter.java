@@ -5,13 +5,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.gc.materialdesign.views.Card;
 import com.github.javiersantos.materialstyleddialogs.MaterialStyledDialog;
 import com.github.javiersantos.materialstyleddialogs.enums.Style;
 import com.parse.ParseObject;
+import com.parse.ParseUser;
+import com.yarolegovich.lovelydialog.LovelyTextInputDialog;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import apps.everythingforward.com.wellnesstherapist.R;
@@ -84,6 +88,50 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
             }
         });
 
+        holderFinal.messageCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+                new LovelyTextInputDialog(holderFinal.messageCard.getContext())
+                        .setTopColorRes(R.color.accent)
+                        .setTitle("Message:")
+                        .setMessage("Reply to this message")
+                        .setConfirmButton(android.R.string.ok, new LovelyTextInputDialog.OnTextInputConfirmListener() {
+                                    @Override
+                                    public void onTextInputConfirmed(String text) {
+
+                                        Calendar calendar =Calendar.getInstance();
+                                        String timeStamp=calendar.getTime().toString();
+
+                                        ParseObject object = new ParseObject("Messages");
+
+                                        object.put(Utility.MESSAGES_FROM, ParseUser.getCurrentUser().getEmail());
+                                        object.put(Utility.MESSAGES_TO,fromEmail);
+                                        object.put(Utility.MESSAGE_CONTENT,text);
+                                        object.put(Utility.MESSAGE_TIME,timeStamp);
+                                        object.put(Utility.MESSAGE_SENDERNAME,ParseUser.getCurrentUser().getString("name"));
+                                        object.saveInBackground();
+                                        Toast.makeText(holderFinal.messageCard.getContext(), "Sent message!", Toast.LENGTH_SHORT).show();
+                                    }
+                                }).show();
+
+                /*
+                ParseObject object = new ParseObject("Messages");
+
+                object.put(Utility.MESSAGES_FROM, ParseUser.getCurrentUser().getEmail());
+                object.put(Utility.MESSAGES_TO,email);
+                object.put(Utility.MESSAGE_CONTENT,text);
+                object.put(Utility.MESSAGE_TIME,timeStamp);
+                object.put(Utility.MESSAGE_SENDERNAME,ParseUser.getCurrentUser().getString("name"));
+                object.saveInBackground();
+                Toast.makeText(holderFinal.layout.getContext(), "Sent message!", Toast.LENGTH_SHORT).show();
+
+                */
+
+
+            }
+        });
 
 
     }

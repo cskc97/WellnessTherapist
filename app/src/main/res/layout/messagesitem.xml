@@ -17,7 +17,8 @@
             android:text="From"
             android:textSize="15sp"
 
-            android:id="@+id/messageTV"/>
+            android:id="@+id/messageTV"
+            android:textColor="@color/primary_text"/>
 
         <TextView
             android:text="TimeStamp"
@@ -28,7 +29,8 @@
             android:layout_alignBottom="@+id/messageTV"
             android:layout_alignParentEnd="true"
             android:layout_alignParentTop="true"
-            android:textSize="8dp"/>
+            android:textSize="8dp"
+            android:textColor="@color/secondary_text"/>
 
 
     </com.gc.materialdesign.views.Card>
