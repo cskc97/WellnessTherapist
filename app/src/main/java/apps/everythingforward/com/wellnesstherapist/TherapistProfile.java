@@ -1,5 +1,6 @@
 package apps.everythingforward.com.wellnesstherapist;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
@@ -137,7 +139,8 @@ public class TherapistProfile extends AppCompatActivity {
             public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
 
                 ParseUser.getCurrentUser().logOut();
-                finish();
+                startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                Toast.makeText(TherapistProfile.this, "Successfully Logged Out!", Toast.LENGTH_SHORT).show();
                 return false;
             }
         });

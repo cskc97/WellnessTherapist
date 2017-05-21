@@ -10,6 +10,15 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="apps.everythingforward.com.wellnesstherapist.MainActivity">
 
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="?android:attr/actionBarSize"
+        android:id="@+id/toolbar"
+        android:background="@color/primary"
+
+        />
+
     <com.gc.materialdesign.views.ProgressBarCircularIndeterminate
         android:id="@+id/progressBarCircularIndeterminate"
         android:layout_width="32dp"
