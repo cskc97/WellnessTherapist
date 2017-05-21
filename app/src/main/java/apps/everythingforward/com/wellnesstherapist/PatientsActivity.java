@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.gc.materialdesign.views.ProgressBarCircularIndeterminate;
 import com.parse.FindCallback;
 import com.parse.Parse;
 import com.parse.ParseException;
@@ -20,12 +21,16 @@ import java.util.List;
 
 import apps.everythingforward.com.wellnesstherapist.adapters.PatientsAdapter;
 
+import static android.view.View.GONE;
+
 public class PatientsActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
 
 
     List<ParseObject> passData;
+
+    ProgressBarCircularIndeterminate progressBarCircularIndeterminate;
 
 
 
@@ -36,6 +41,11 @@ public class PatientsActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("My Patients");
+
+        progressBarCircularIndeterminate = (ProgressBarCircularIndeterminate)findViewById(R.id.progressBarCircularIndeterminate);
+
+
+
 
         passData = new ArrayList<ParseObject>();
         recyclerView = (RecyclerView)findViewById(R.id.patientsRV);
@@ -60,6 +70,8 @@ public class PatientsActivity extends AppCompatActivity {
             public void done(List<ParseObject> objects, ParseException e) {
 
                 if (e == null) {
+
+                    progressBarCircularIndeterminate.setVisibility(GONE);
                     for (ParseObject object : objects) {
 
                         String email = object.getString(Utility.CONNECTION_USERUSERNAME);
@@ -84,7 +96,7 @@ public class PatientsActivity extends AppCompatActivity {
                             objectArrayList = query.find();
 
                             if(!objectArrayList.isEmpty()) {
-                                Toast.makeText(PatientsActivity.this, objectArrayList.get(0).getString(Utility.USER_NAME), Toast.LENGTH_SHORT).show();
+                            //    Toast.makeText(PatientsActivity.this, objectArrayList.get(0).getString(Utility.USER_NAME), Toast.LENGTH_SHORT).show();
                                 passData.add(objectArrayList.get(0));
                             }
                             else

@@ -24,4 +24,11 @@
         android:id="@+id/inboxRV"
         android:paddingTop="10dp"/>
 
+    <com.gc.materialdesign.views.ProgressBarCircularIndeterminate
+        android:id="@+id/progressBarCircularIndeterminate"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:background="#1E88E5"
+        android:layout_centerInParent="true"/>
+
 </RelativeLayout>

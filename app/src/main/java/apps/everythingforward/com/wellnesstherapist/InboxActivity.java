@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.widget.Toast;
 
+import com.gc.materialdesign.views.ProgressBarCircularIndeterminate;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
@@ -17,8 +18,12 @@ import java.util.List;
 
 import apps.everythingforward.com.wellnesstherapist.adapters.MessageAdapter;
 
+import static android.view.View.GONE;
+
 public class InboxActivity extends AppCompatActivity {
 
+
+    ProgressBarCircularIndeterminate progressBarCircularIndeterminate;
 
     RecyclerView recyclerview;
     @Override
@@ -30,6 +35,8 @@ public class InboxActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("Your Inbox");
 
         recyclerview = (RecyclerView)findViewById(R.id.inboxRV);
+
+        progressBarCircularIndeterminate = (ProgressBarCircularIndeterminate)findViewById(R.id.progressBarCircularIndeterminate);
     }
 
 
@@ -52,6 +59,8 @@ public class InboxActivity extends AppCompatActivity {
             public void done(List<ParseObject> objects, ParseException e) {
                 if(e==null)
                 {
+
+                    progressBarCircularIndeterminate.setVisibility(GONE);
                     if(!objects.isEmpty())
                     {
                         MessageAdapter adapter = new MessageAdapter(objects);

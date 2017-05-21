@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode==0)
         {
-            Toast.makeText(this, "onActivityResult", Toast.LENGTH_SHORT).show();
+        //    Toast.makeText(this, "onActivityResult", Toast.LENGTH_SHORT).show();
         }
 
 
