@@ -106,7 +106,7 @@ public class FillDetails extends AppCompatActivity {
 
             path = images.get(0).getPath();
 
-            Toast.makeText(this, path, Toast.LENGTH_LONG).show();
+        //    Toast.makeText(this, path, Toast.LENGTH_LONG).show();
 
             Uri uri = Uri.fromFile(new File(path));
 
