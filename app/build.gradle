@@ -61,5 +61,7 @@ dependencies {
         transitive = true
     }
 
+    compile 'com.github.javiersantos:MaterialStyledDialogs:2.1'
+
 
 }

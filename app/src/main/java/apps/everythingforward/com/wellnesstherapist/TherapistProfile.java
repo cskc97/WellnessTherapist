@@ -132,7 +132,23 @@ public class TherapistProfile extends AppCompatActivity {
         PrimaryDrawerItem item1 = new PrimaryDrawerItem().withIdentifier(1).withName("My Profile");
         PrimaryDrawerItem item2 = new PrimaryDrawerItem().withIdentifier(2).withName("My Patients");
 
-        PrimaryDrawerItem item3 = new PrimaryDrawerItem().withIdentifier(3).withName("Logout");
+        PrimaryDrawerItem item3 = new PrimaryDrawerItem().withIdentifier(4).withName("Logout");
+
+        PrimaryDrawerItem item4 = new PrimaryDrawerItem().withIdentifier(3).withName("Your Inbox");
+
+
+
+        item4.withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
+            @Override
+            public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
+
+                startActivity(new Intent(getApplicationContext(),InboxActivity.class));
+
+                return false;
+            }
+        });
+
+
 
         item3.withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
             @Override
@@ -165,7 +181,10 @@ public class TherapistProfile extends AppCompatActivity {
                         new DividerDrawerItem(),
                         item2,
                         new DividerDrawerItem(),
+                        item4,
+                        new DividerDrawerItem(),
                         item3
+
 
                 )
 
