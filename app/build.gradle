@@ -62,6 +62,7 @@ dependencies {
     }
 
     compile 'com.github.javiersantos:MaterialStyledDialogs:2.1'
+    compile 'com.yarolegovich:lovely-dialog:1.0.7'
 
 
 }

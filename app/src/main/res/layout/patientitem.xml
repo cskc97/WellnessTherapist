@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/relLayout"
+    android:minHeight="50dp">
+
+
+
+    <com.gc.materialdesign.views.Card
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="75dp"
+        android:id="@+id/patientCard">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+
+            android:text="Patient"
+            android:textSize="15sp"
+
+            android:id="@+id/patientName"
+            android:layout_centerInParent="true"/>
+
+    </com.gc.materialdesign.views.Card>
+
+
+
+
+
+
+
+
+</RelativeLayout>

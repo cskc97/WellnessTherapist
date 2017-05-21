@@ -21,4 +21,7 @@ public class Utility {
     public static String MESSAGE_CLASS="Messages";
     public static String MESSAGE_TIME="timestamp";
     public static String MESSAGE_SENDERNAME="sendername";
+
+    public static String USER_NAME="name";
+    public static String USER_EMAIL="username";
 }

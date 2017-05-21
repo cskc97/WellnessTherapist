@@ -136,6 +136,16 @@ public class TherapistProfile extends AppCompatActivity {
 
         PrimaryDrawerItem item4 = new PrimaryDrawerItem().withIdentifier(3).withName("Your Inbox");
 
+        item2.withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
+            @Override
+            public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
+
+                startActivity(new Intent(getApplicationContext(),PatientsActivity.class));
+
+                return false;
+            }
+        });
+
 
 
         item4.withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
